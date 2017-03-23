@@ -32,7 +32,6 @@ class cacheAppAnotado(webapp.webApp):
                 link1 = "\n<a href='" + url + "'> Original Web</a>"
                 link2 = "\n<a href='/reload/" + rec + "'> RecargarWeb </a>"
                 html = html[:offsite2] + link1 + link2  + html[offsite2:]
-                print(html)
         except urllib.error.URLError:
             html = self.html("No ha sido posible tener conexion con " + url)
         return html
@@ -49,7 +48,6 @@ class cacheAppAnotado(webapp.webApp):
                     htmlAnswer = self.generoHtml(url,recurso)
                     self.diccUrl[url] = htmlAnswer
             else:
-                print(recurso.split("/"))
                 httpCode = "200 Ok"
                 htmlAnswer = self.generoHtml(url, recurso)
                 self.diccUrl[url] = htmlAnswer
@@ -61,3 +59,9 @@ class cacheAppAnotado(webapp.webApp):
 
 if __name__ == "__main__":
     testApp = cacheAppAnotado('localhost',1231)
+""""
+-> Falta controlar las peticiones de las imagenes con urls relativas que contienen el html que de devuelve original, lo hago tratando la excepcion de urllib,
+y enviando de esta manera un 404 de codigo HTTP
+-> Falta introducir los enlaces donde se ven las iteraciones HTTP, para obtenerlas podemos usar las funciones de urrlib.request
+
+""""
